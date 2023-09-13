@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`queryPersister should create query persister and call createSyncStoragePersister 1`] = `
+{
+  "persistClient": [Function],
+  "removeClient": [Function],
+  "restoreClient": [Function],
+}
+`;
