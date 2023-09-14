@@ -1,12 +1,13 @@
 {
-  "name": "@react-query-impl/source",
+  "name": "@query-impl/source",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
     "start": "npm run serve",
-    "serve": "nx serve react-query-impl",
-    "build": "nx build react-query-impl",
-    "test": "nx run-many --all --target=test"
+    "serve": "nx serve query-impl-app",
+    "build": "nx build query-impl-app",
+    "test": "nx run-many --all --target=test",
+    "clear": "rimraf coverage && rimraf dist"
   },
   "private": true,
   "dependencies": {

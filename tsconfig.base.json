@@ -16,8 +16,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@rq-impl/core": ["libs/core/src/index.ts"],
-      "@rq-impl/core/*": ["libs/core/src/*"]
+      "@query-impl/app/*": ["apps/query-impl-app/app/*"],
+      "@query-impl/core": ["libs/query-impl-core/src/index.ts"],
+      "@query-impl/core/*": ["libs/query-impl-core/src/*"],
+      "@query-impl/core/testing": ["libs/query-impl-core/src/testing/index.ts"],
+      "@query-impl/core/testing/*": ["libs/query-impl-core/src/testing/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
