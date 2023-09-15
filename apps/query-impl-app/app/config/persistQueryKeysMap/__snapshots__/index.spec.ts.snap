@@ -2,6 +2,7 @@
 
 exports[`persistQueryKeysMap should match snapshot 1`] = `
 {
-  "todo": true,
+  "samples.counter": true,
+  "samples.todo": true,
 }
 `;

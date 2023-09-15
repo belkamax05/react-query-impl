@@ -5,8 +5,8 @@ import AppFooter from './components/AppFooter';
 import AppHeader from './components/AppHeader';
 import QueryProvider from './components/QueryProvider';
 import { START_TIME } from './config/env';
-import './global.scss';
 import queryClientConfig from './config/queryClientConfig';
+import './global.scss';
 import dashboardState from './query/states/dashboardState';
 
 export const metadata: Metadata = {
@@ -33,7 +33,6 @@ export default async function RootLayout({
   const queryClient = new QueryClient(queryClientConfig);
   await init(queryClient);
   const state = dehydrate(queryClient);
-  console.log('RootLayout', state?.queries);
 
   return (
     <html lang="en">

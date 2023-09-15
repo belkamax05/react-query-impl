@@ -3,6 +3,11 @@
 exports[`persistQueryKeys should match snapshot 1`] = `
 [
   [
+    "samples",
+    "counter",
+  ],
+  [
+    "samples",
     "todo",
   ],
 ]

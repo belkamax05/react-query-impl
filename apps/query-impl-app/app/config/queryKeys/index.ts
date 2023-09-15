@@ -14,7 +14,7 @@ const queryKeys = validateConfigType(
       counter: ['samples', 'counter'],
       todo: ['samples', 'todo'],
     },
-  },
+  } as const,
   null as DeepRecord<string, QueryKey | QueryKeyFunction>
 );
 

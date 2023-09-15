@@ -12,8 +12,6 @@ export default async function QueryProvider({
   state,
 }: React.PropsWithChildren<{ state: DehydratedState }>) {
   const client = useMemo(() => new QueryClient(queryClientConfig), []);
-  console.log('QueryProvider', state?.queries);
-
   return (
     <PersistQueryClientProvider
       client={client}

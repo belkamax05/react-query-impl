@@ -1,5 +1,9 @@
 import View from './View';
-import styles from './styles.module.scss';
+import styles from './page.module.scss';
+
+export const metadata = {
+  title: 'Counter sample',
+};
 
 export default async function CounterPage() {
   return (

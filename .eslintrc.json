@@ -14,6 +14,7 @@
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-parameter-properties": "off",
+    "@next/next/no-img-element": "off",
     "@nrwl/nx/enforce-module-boundaries": [
       "off",
       {

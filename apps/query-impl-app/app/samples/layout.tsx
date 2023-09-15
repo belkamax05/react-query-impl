@@ -2,7 +2,8 @@ import { Box, Link } from '@mui/material';
 import { PropsWithChildren } from 'react';
 import classes from './styles.module.scss';
 
-export default async function SamplesLayout({ children }: PropsWithChildren) {
+export default async function SamplesLayout({ children, ...rest }: PropsWithChildren) {
+  console.log({ rest })
   return (
     <div className={classes['layout-root']}>
       <Box className={classes['nav']}>

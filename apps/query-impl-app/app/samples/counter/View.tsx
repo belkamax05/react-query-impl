@@ -1,28 +1,27 @@
 'use client';
 
-import { Button } from '@mui/base';
-import { useQueryClient } from '@tanstack/react-query';
-import { useCallback } from 'react';
-import counterState from '../../query/counterState';
+import { Box } from '@mui/material';
+import styles from './View.module.scss';
+import CounterSample1 from './components/CounterSample1';
+import CounterSample2 from './components/CounterSample2';
+import CounterSample3 from './components/CounterSample3';
 
 const View = () => {
-  const queryClient = useQueryClient();
-
-  const counter = counterState.useData();
-
-  const setCounter = useCallback(
-    (value: number) => counterState.setData(value, queryClient),
-    [queryClient]
-  );
-
-  console.log({ counter })
-
   return (
-    <div>
-      <pre>Counter value: {counter}</pre>
-      <Button onClick={() => setCounter(counter + 1)}>Inc</Button>
-      <Button onClick={() => setCounter(counter - 1)}>Dec</Button>
-    </div>
+    <Box className={styles.root}>
+      <Box>
+        <h3>Sample 1:</h3>
+        <CounterSample1 />
+      </Box>
+      <Box>
+        <h3>Sample 2:</h3>
+        <CounterSample2 />
+      </Box>
+      <Box>
+        <h3>Sample 3:</h3>
+        <CounterSample3 />
+      </Box>
+    </Box>
   );
 };
 

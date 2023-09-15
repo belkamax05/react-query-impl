@@ -1,22 +1,9 @@
-import { QueryClient, QueryKey, useQuery } from '@tanstack/react-query';
-
-export interface CreatedState<
-  TQueryKey extends QueryKey,
-  TData extends unknown
-> {
-  /** get data from state, require queryClient as argument */
-  getData: (queryClient: QueryClient) => TData;
-  /** set data to state, require queryClient as second argument */
-  setData: (data: TData, queryClient: QueryClient) => TData;
-  /** observe data change and returns it's value */
-  useData: () => TData;
-  /** reset data back to it's initial state */
-  reset: (queryClient: QueryClient) => TData;
-  /** queryKey - same as being passed as props */
-  queryKey: TQueryKey;
-  /** initialData - same as being passed as props */
-  initialData: TData;
-}
+import {
+  QueryClient,
+  QueryKey,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 
 /**
  * Creates react-query based state allowing to read and write data to the query cache
@@ -29,31 +16,48 @@ export interface CreatedState<
  *  initialData: 'test',
  * });
  */
-const createQueryState = <
-  TQueryKey extends QueryKey,
-  TData extends unknown,
-  TResult extends CreatedState<TQueryKey, TData>
->({
+const createQueryState = <TQueryKey extends QueryKey, TData>({
   queryKey,
   initialData,
 }: {
+  /** queryKey where state is stored */
   queryKey: TQueryKey;
+  /** data state have to be initialized with */
   initialData: TData;
-}): TResult => {
-  const getData: TResult['getData'] = (queryClient) =>
-    queryClient.getQueryData(queryKey);
+}) => {
+  /** get data from queryClient state */
+  const getData = (queryClient: QueryClient) =>
+    queryClient.getQueryData<TData>(queryKey);
 
-  const setData: TResult['setData'] = (data, queryClient) =>
+  /** set data into queryClient state */
+  const setData = (data: TData, queryClient: QueryClient) =>
     queryClient.setQueryData(queryKey, data);
 
-  const reset: TResult['reset'] = (queryClient) =>
-    setData(initialData, queryClient);
+  /** resets data to initial */
+  const reset = (queryClient: QueryClient) => setData(initialData, queryClient);
 
-  const useData: TResult['useData'] = () =>
-    useQuery({
+  /** get data using react-query hook */
+  const useData = () => {
+    const current = getData(useQueryClient());
+    const { data } = useQuery({
       queryKey,
-      initialData,
-    })?.data;
+      queryFn: () => current || initialData,
+    });
+    return data;
+  };
+
+  const useClient = () => {
+    const queryClient = useQueryClient();
+    const getDataInner = () => getData(queryClient);
+    const setDataInner = (data: TData) => setData(data, queryClient);
+    const resetInner = () => reset(queryClient);
+    return {
+      getData: getDataInner,
+      setData: setDataInner,
+      reset: resetInner,
+      useData,
+    };
+  };
 
   return {
     getData,
@@ -62,7 +66,8 @@ const createQueryState = <
     reset,
     queryKey,
     initialData,
-  } as TResult;
+    useClient,
+  };
 };
 
 export type CreateQueryStateResult = ReturnType<typeof createQueryState>;

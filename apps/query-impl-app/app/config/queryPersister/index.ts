@@ -3,10 +3,6 @@ import { PersistedClient } from '@tanstack/react-query-persist-client';
 import { IS_CLIENT } from '../env';
 import persistQueryKeysMap from '../persistQueryKeysMap';
 
-console.log({
-  persistQueryKeysMap,
-});
-
 export const persisterSerialize = (client: PersistedClient) => {
   const resultClient: PersistedClient = {
     ...client,
@@ -14,7 +10,6 @@ export const persisterSerialize = (client: PersistedClient) => {
       ...client.clientState,
       queries: client.clientState.queries.filter((query) => {
         const res = persistQueryKeysMap[query.queryKey.join('.')];
-        console.log('persisterSerialize', { res, query, persistQueryKeysMap });
         return res;
       }),
     },
