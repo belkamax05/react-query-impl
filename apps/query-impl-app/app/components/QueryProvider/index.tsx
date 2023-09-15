@@ -4,8 +4,8 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental';
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 import React, { useMemo } from 'react';
-import queryClientConfig from '../../../query/config/queryClientConfig';
-import queryPersister from '../../../query/config/queryPersister';
+import queryClientConfig from '../../config/queryClientConfig';
+import queryPersister from '../../config/queryPersister';
 
 export default async function QueryProvider({
   children,

@@ -1,5 +1,5 @@
 import { createQueryState } from '@query-impl/core';
-import queryKeys from '../../config/queryKeys';
+import queryKeys from '../../../config/queryKeys';
 
 interface DashboardState {
   /**
@@ -13,7 +13,7 @@ interface DashboardState {
 }
 
 const dashboardState = createQueryState({
-  queryKey: queryKeys.dashboard,
+  queryKey: queryKeys.app.dashboard,
   initialData: null as DashboardState,
 });
 

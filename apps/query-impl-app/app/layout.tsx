@@ -3,10 +3,10 @@ import { Metadata } from 'next';
 import React from 'react';
 import AppFooter from './components/AppFooter';
 import AppHeader from './components/AppHeader';
-import QueryProvider from './components/providers/QueryProvider';
+import QueryProvider from './components/QueryProvider';
 import { START_TIME } from './config/env';
 import './global.scss';
-import queryClientConfig from './query/config/queryClientConfig';
+import queryClientConfig from './config/queryClientConfig';
 import dashboardState from './query/states/dashboardState';
 
 export const metadata: Metadata = {

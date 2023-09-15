@@ -16,7 +16,6 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@query-impl/app/*": ["apps/query-impl-app/app/*"],
       "@query-impl/core": ["libs/query-impl-core/src/index.ts"],
       "@query-impl/core/*": ["libs/query-impl-core/src/*"],
       "@query-impl/core/testing": ["libs/query-impl-core/src/testing/index.ts"],

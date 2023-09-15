@@ -1,5 +1,5 @@
 import { Hydrate, QueryClient, dehydrate } from '@tanstack/react-query';
-import queryClientConfig from './query/config/queryClientConfig';
+import queryClientConfig from './config/queryClientConfig';
 
 const init = (queryClient: QueryClient) => {
   queryClient.setQueryData(['init.Index'], 'OK');

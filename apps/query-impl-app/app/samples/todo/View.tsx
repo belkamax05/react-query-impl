@@ -1,9 +1,9 @@
 'use client';
 
 import { Box, Button, TextField } from '@mui/material';
-import { MouseEventHandler, useCallback, useRef } from 'react';
-import todoState from '../../query/states/todoState';
 import { useQueryClient } from '@tanstack/react-query';
+import { MouseEventHandler, useCallback, useRef } from 'react';
+import todoState from '../../query/todoState';
 import { Guid } from '../../utils/helpers/Guid';
 
 const View = () => {

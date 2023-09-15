@@ -1,6 +1,6 @@
 import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
 import { PersistedClient } from '@tanstack/react-query-persist-client';
-import { IS_CLIENT } from '../../../config/env';
+import { IS_CLIENT } from '../env';
 import persistQueryKeysMap from '../persistQueryKeysMap';
 
 console.log({
