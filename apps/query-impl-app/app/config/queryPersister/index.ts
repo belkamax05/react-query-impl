@@ -19,7 +19,6 @@ export const persisterSerialize = (client: PersistedClient) => {
 
 export const persisterDeserialize = (cachedString: string) => {
   const client: PersistedClient = JSON.parse(cachedString);
-  console.log('persisterDeserialize', client);
   return client;
 };
 
