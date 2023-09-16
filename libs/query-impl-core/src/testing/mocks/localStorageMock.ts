@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * localStorage mocking
  * @usage jest.mock('@rq-impl/core/testing/mocks/localStorageMock');
@@ -9,12 +10,12 @@ const localStorageMock = (function (): Pick<
 > {
   let store = {};
   return {
-    getItem: (key) => {
-      return store[key];
+    getItem: (key: any) => {
+      return (store as any)[key as any];
     },
 
     setItem(key, value) {
-      store[key] = value;
+      (store as any)[key as any] = value;
     },
 
     clear() {
@@ -22,7 +23,7 @@ const localStorageMock = (function (): Pick<
     },
 
     removeItem(key) {
-      delete store[key];
+      delete  (store as any)[key as any];
     },
 
     getAll() {

@@ -8,10 +8,10 @@
     "build": "npm run build:scss && npm run build:app",
     "test": "nx run-many --all --target=test",
     "clear": "rimraf coverage && rimraf dist",
-    "watch:scss": "nx serve query-impl-app",
     "serve:app": "nx serve query-impl-app",
     "build:app": "nx build query-impl-app",
-    "build:scss": "yarn typed-scss-modules apps/query-impl-app --nameFormat=kebab --exportType=default --watch"
+    "watch:scss": "yarn typed-scss-modules apps/query-impl-app --nameFormat=kebab --exportType=default --watch",
+    "build:scss": "yarn typed-scss-modules apps/query-impl-app --nameFormat=kebab --exportType=default"
   },
   "private": true,
   "dependencies": {
