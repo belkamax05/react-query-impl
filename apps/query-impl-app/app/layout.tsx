@@ -5,7 +5,6 @@ import AppFooter from './components/AppFooter';
 import AppHeader from './components/AppHeader';
 import QueryProvider from './components/QueryProvider';
 import { START_TIME } from './config/env';
-import queryClientConfig from './config/queryClientConfig';
 import './global.scss';
 import dashboardState from './query/states/dashboardState';
 
@@ -15,7 +14,6 @@ export const metadata: Metadata = {
 };
 
 const init = async (queryClient: QueryClient) => {
-  await queryClient.setQueryData(['init.RootLayout'], 'OK');
   await dashboardState.setData(
     {
       startupTime: START_TIME.toISOString(),
@@ -25,12 +23,8 @@ const init = async (queryClient: QueryClient) => {
   );
 };
 
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const queryClient = new QueryClient(queryClientConfig);
+async function RootLayout({ children }: { children: React.ReactNode }) {
+  const queryClient = new QueryClient();
   await init(queryClient);
   const state = dehydrate(queryClient);
 
@@ -46,3 +40,5 @@ export default async function RootLayout({
     </html>
   );
 }
+
+export default RootLayout;

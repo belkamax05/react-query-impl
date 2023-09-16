@@ -1,19 +1,19 @@
 import { Box } from '@mui/material';
-import { Hydrate, dehydrate } from '@tanstack/react-query';
-import queryClientConfig from '../../config/queryClientConfig';
+import { withClient } from '@query-impl/core';
+import { QueryClient } from '@tanstack/react-query';
 import pokemonListApi from '../../query/pokemonListApi';
-import getQueryClient from '../../utils/getQueryClient';
 import View from './View';
 import styles from './styles.module.scss';
 
-export default async function Page({
+async function Page({
   searchParams,
+  queryClient,
 }: {
   searchParams: { limit: string; offset: string };
+  queryClient: QueryClient;
 }) {
   const limit = parseInt(searchParams.limit || '5');
   const offset = parseInt(searchParams.offset || '0');
-  const queryClient = getQueryClient(queryClientConfig);
 
   await pokemonListApi.prefetch(
     {
@@ -24,10 +24,10 @@ export default async function Page({
   );
 
   return (
-    <Hydrate state={dehydrate(queryClient)}>
-      <Box className={styles.root}>
-        <View limit={limit} offset={offset} />
-      </Box>
-    </Hydrate>
+    <Box className={styles.root}>
+      <View limit={limit} offset={offset} />
+    </Box>
   );
 }
+
+export default withClient(Page);

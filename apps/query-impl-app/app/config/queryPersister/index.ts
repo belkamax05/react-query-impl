@@ -9,7 +9,8 @@ export const persisterSerialize = (client: PersistedClient) => {
     clientState: {
       ...client.clientState,
       queries: client.clientState.queries.filter((query) => {
-        const res = persistQueryKeysMap[query.queryKey.join('.')];
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const res = (persistQueryKeysMap as any)[query.queryKey.join('.') as any];
         return res;
       }),
     },

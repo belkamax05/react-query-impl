@@ -11,7 +11,8 @@ const persistQueryKeysMap = (<
   const result: Partial<TResult> = {};
   persistQueryKeys.forEach((queryKey) => {
     const jointKey = queryKey.join('.') as QueryKeyJoin<typeof queryKey>;
-    result[jointKey] = true;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (result as any)[jointKey as any] = true;
   });
   return result as TResult;
 })();
