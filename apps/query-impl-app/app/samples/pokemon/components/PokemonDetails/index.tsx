@@ -1,14 +1,20 @@
-"use client";
-import { Table } from '@mui/material';
+'use client';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from '@mui/material';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import pokemonApi from '../../query/pokemonApi';
 import classes from './index.module.scss';
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
 
 const PokemonDetails = ({ name }: { name: string }) => {
   const { data, isLoading } = pokemonApi.useFetch({ name });
 
-  if(isLoading) return <Skeleton height={500} />
+  if (isLoading) return <Skeleton height={500} />;
   return (
     <div className={classes.root}>
       <h3>
@@ -17,30 +23,32 @@ const PokemonDetails = ({ name }: { name: string }) => {
       <div>
         <img src={data.sprites.front_default} alt={data.name} />
       </div>
-      <Table className={classes['stats-table']}>
-        <thead>
+      <Table size="small" className={classes['stats-table']}>
+        <TableHead>
           <tr>
             <th>Stat</th>
             <th>Value</th>
           </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>height</td>
-            <td>{data.height}</td>
-          </tr>
-          <tr>
-            <td>base_experience</td>
-            <td>{data.base_experience}</td>
-          </tr>
-          <tr><td colSpan={2}>&nbsp;</td></tr>
+        </TableHead>
+        <TableBody>
+          <TableRow>
+            <TableCell>height</TableCell>
+            <TableCell>{data.height}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>base_experience</TableCell>
+            <TableCell>{data.base_experience}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell colSpan={2}>&nbsp;</TableCell>
+          </TableRow>
           {data?.stats?.map((stat) => (
-            <tr key={stat.stat.name}>
-              <td>{stat.stat.name}</td>
-              <td>{stat.base_stat}</td>
-            </tr>
+            <TableRow key={stat.stat.name}>
+              <TableCell>{stat.stat.name}</TableCell>
+              <TableCell>{stat.base_stat}</TableCell>
+            </TableRow>
           ))}
-        </tbody>
+        </TableBody>
       </Table>
     </div>
   );

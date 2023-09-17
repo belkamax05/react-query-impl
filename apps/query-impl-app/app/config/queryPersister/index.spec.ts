@@ -1,9 +1,6 @@
-import localStorageMock from '@query-impl/core/testing/mocks/localStorageMock';
 import { DehydratedState } from '@tanstack/react-query';
 import { PersistedClient } from '@tanstack/react-query-persist-client';
 import queryPersister, { persisterDeserialize, persisterSerialize } from '.';
-
-Object.defineProperty(window, 'localStorage', { value: localStorageMock });
 
 describe('queryPersister', () => {
   it('should create query persister and call createSyncStoragePersister', () => {

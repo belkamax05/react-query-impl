@@ -10,7 +10,7 @@ async function Page({
   params: { name: string };
   queryClient: QueryClient;
 }) {
-  // await pokemonApi.prefetch({ name }, queryClient);
+  await pokemonApi.prefetch({ name }, queryClient);
 
   return <PokemonDetails name={name} />;
 }
