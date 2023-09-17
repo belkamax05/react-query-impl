@@ -1,6 +1,6 @@
 'use client';
 
-import counterState from '../../../query/counterState';
+import counterState from '../query/counterState';
 import CounterPanel from './CounterPanel';
 
 const CounterSample2 = () => {

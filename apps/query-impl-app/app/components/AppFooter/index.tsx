@@ -1,5 +1,5 @@
 'use client';
-import dashboardState from '../../query/states/dashboardState';
+import dashboardState from '../../query/dashboardState';
 import styles from './styles.module.scss';
 
 const AppFooter = () => {

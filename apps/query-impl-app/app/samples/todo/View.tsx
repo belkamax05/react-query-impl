@@ -3,7 +3,7 @@
 import { Box, Button, TextField } from '@mui/material';
 import { useQueryClient } from '@tanstack/react-query';
 import { MouseEventHandler, useCallback, useRef } from 'react';
-import todoState from '../../query/todoState';
+import todoState from './query/todoState';
 import { Guid } from '../../utils/helpers/Guid';
 
 const View = () => {

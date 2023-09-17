@@ -1,6 +1,7 @@
 import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
 import { PersistedClient } from '@tanstack/react-query-persist-client';
 import { IS_CLIENT } from '../env';
+import { PersistQueryKeysKey } from '../persistQueryKeys';
 import persistQueryKeysMap from '../persistQueryKeysMap';
 
 export const persisterSerialize = (client: PersistedClient) => {
@@ -9,9 +10,9 @@ export const persisterSerialize = (client: PersistedClient) => {
     clientState: {
       ...client.clientState,
       queries: client.clientState.queries.filter((query) => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const res = (persistQueryKeysMap as any)[query.queryKey.join('.') as any];
-        return res;
+        const keyStr = query.queryKey.join('.') as PersistQueryKeysKey;
+        const res = persistQueryKeysMap[keyStr];
+        return res !== undefined && res;
       }),
     },
   };

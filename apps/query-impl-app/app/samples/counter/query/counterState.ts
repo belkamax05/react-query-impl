@@ -1,9 +1,9 @@
 import { createQueryState, extendSelf } from '@query-impl/core';
-import queryKeys from '../config/queryKeys';
+import queryKeys from '../../../config/queryKeys';
 
 const counterStateBase = createQueryState({
   queryKey: queryKeys.samples.counter,
-  initialData: 42,
+  queryFn: () => 42,
 });
 
 const counterState = extendSelf(counterStateBase, (self) => {

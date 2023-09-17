@@ -1,18 +1,13 @@
-import { QueryKey } from '@tanstack/react-query';
-import { Call, Tuples } from 'hotscript';
-import persistQueryKeys from '../persistQueryKeys';
-
-type QueryKeyJoin<TKey extends QueryKey> = Call<Tuples.Join<'.'>, TKey>;
+import persistQueryKeys, { PersistQueryKeysKey } from '../persistQueryKeys';
 
 const persistQueryKeysMap = (<
-  TKey extends QueryKeyJoin<Call<Tuples.ToUnion, typeof persistQueryKeys>>,
+  TKey extends PersistQueryKeysKey,
   TResult extends Record<TKey, true>
 >(): TResult => {
   const result: Partial<TResult> = {};
   persistQueryKeys.forEach((queryKey) => {
-    const jointKey = queryKey.join('.') as QueryKeyJoin<typeof queryKey>;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (result as any)[jointKey as any] = true;
+    const jointKey = queryKey.join('.') as TKey;
+    result[jointKey] = true as TResult[TKey];
   });
   return result as TResult;
 })();

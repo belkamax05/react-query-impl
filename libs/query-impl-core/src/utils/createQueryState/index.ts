@@ -18,12 +18,14 @@ import {
  */
 const createQueryState = <TQueryKey extends QueryKey, TData>({
   queryKey,
+  queryFn,
   initialData,
 }: {
   /** queryKey where state is stored */
   queryKey: TQueryKey;
+  queryFn?: () => TData;
   /** data state have to be initialized with */
-  initialData: TData;
+  initialData?: TData | (() => TData);
 }) => {
   /** get data from queryClient state */
   const getData = (queryClient: QueryClient) =>
@@ -34,14 +36,20 @@ const createQueryState = <TQueryKey extends QueryKey, TData>({
     queryClient.setQueryData(queryKey, data);
 
   /** resets data to initial */
-  const reset = (queryClient: QueryClient) => setData(initialData, queryClient);
+  const reset = (queryClient: QueryClient) => {
+    const value = initialData instanceof Function ? initialData() : initialData;
+    setData(value, queryClient);
+  };
 
   /** get data using react-query hook */
   const useData = () => {
-    const current = getData(useQueryClient());
+    // const queryClient = useQueryClient();
+    // const current = getData(queryClient);
     const { data } = useQuery({
       queryKey,
-      queryFn: () => current || initialData,
+      // queryFn: () => current || initialData,
+      initialData,
+      queryFn,
     });
     return data;
   };

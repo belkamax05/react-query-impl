@@ -11,11 +11,11 @@ const localStorageMock = (function (): Pick<
   let store = {};
   return {
     getItem: (key: any) => {
-      return (store as any)[key as any];
+      return store[key];
     },
 
     setItem(key, value) {
-      (store as any)[key as any] = value;
+      store[key] = value;
     },
 
     clear() {
@@ -23,7 +23,7 @@ const localStorageMock = (function (): Pick<
     },
 
     removeItem(key) {
-      delete  (store as any)[key as any];
+      delete store[key];
     },
 
     getAll() {

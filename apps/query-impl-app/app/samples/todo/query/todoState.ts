@@ -1,6 +1,6 @@
 import { createQueryState, extendSelf } from '@query-impl/core';
 import { QueryClient } from '@tanstack/react-query';
-import queryKeys from '../config/queryKeys';
+import queryKeys from '../../../config/queryKeys';
 
 interface TodoItem {
   id: string;
@@ -12,7 +12,7 @@ type TodoState = TodoItem[];
 const todoState = extendSelf(
   createQueryState({
     queryKey: queryKeys.samples.todo,
-    initialData: [] as TodoState,
+    queryFn: () => [] as TodoState,
   }),
   (self) => {
     const push = (item: TodoItem, queryClient: QueryClient) => {

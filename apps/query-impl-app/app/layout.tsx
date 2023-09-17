@@ -6,7 +6,7 @@ import AppHeader from './components/AppHeader';
 import QueryProvider from './components/QueryProvider';
 import { START_TIME } from './config/env';
 import './global.scss';
-import dashboardState from './query/states/dashboardState';
+import dashboardState from './query/dashboardState';
 
 export const metadata: Metadata = {
   title: 'Welcome to query-impl-app',

@@ -1,5 +1,5 @@
 import { createQueryState } from '@query-impl/core';
-import queryKeys from '../../../config/queryKeys';
+import queryKeys from '../../config/queryKeys';
 
 interface DashboardState {
   /**

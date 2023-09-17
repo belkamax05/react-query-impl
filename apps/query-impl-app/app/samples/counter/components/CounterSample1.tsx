@@ -1,7 +1,7 @@
 'use client';
 
 import { useQueryClient } from '@tanstack/react-query';
-import counterState from '../../../query/counterState';
+import counterState from '../query/counterState';
 import CounterPanel from './CounterPanel';
 
 const CounterSample1 = () => {
