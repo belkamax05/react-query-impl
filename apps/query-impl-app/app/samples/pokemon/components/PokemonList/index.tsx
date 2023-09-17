@@ -47,11 +47,9 @@ const PokemonList = ({ limit, offset }: { limit: number; offset: number }) => {
     setNameInFocus(null);
   };
 
-  console.log('!!!PokemonList', { nameInFocus });
-
   return (
     <div className={classes.root}>
-      <Table>
+      <Table size="small">
         <TableBody>
           {data?.results?.map((pokemon) => (
             <TableRow
