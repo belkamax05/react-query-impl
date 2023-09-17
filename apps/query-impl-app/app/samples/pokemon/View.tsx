@@ -3,10 +3,9 @@
 import { Box, MenuItem, Select } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import pokemonListApi from '../../query/pokemonListApi';
+import PokemonList from './components/PokemonList';
 
 const View = ({ limit, offset }: { limit: number; offset: number }) => {
-  const { data } = pokemonListApi.useFetch({ limit, offset });
   const router = useRouter();
 
   return (
@@ -26,19 +25,7 @@ const View = ({ limit, offset }: { limit: number; offset: number }) => {
         <MenuItem value={20}>20</MenuItem>
         <MenuItem value={50}>50</MenuItem>
       </Select>
-      <table>
-        <tbody>
-          {data?.results?.map((pokemon) => (
-            <tr key={pokemon.name}>
-              <td>
-                <Link href={`/samples/pokemon/${pokemon.name}`}>
-                  {pokemon.name}
-                </Link>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <PokemonList limit={limit} offset={offset} />
       <hr />
       <Box display={'flex'} gap={1}>
         <Link

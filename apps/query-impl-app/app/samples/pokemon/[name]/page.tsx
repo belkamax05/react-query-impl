@@ -1,23 +1,17 @@
 import { withClient } from '@query-impl/core';
 import { QueryClient } from '@tanstack/react-query';
-import pokemonApi from '../../../query/pokemonApi';
-import View from './View';
+import PokemonDetails from '../components/PokemonDetails';
+import pokemonApi from '../query/pokemonApi';
 
-async function PokemonPage({
-  params,
+async function Page({
+  params: { name },
   queryClient,
 }: {
   params: { name: string };
   queryClient: QueryClient;
 }) {
-  const { name } = params;
-  await pokemonApi.prefetch({ name }, queryClient);
+  // await pokemonApi.prefetch({ name }, queryClient);
 
-  return (
-    <>
-      <h1>This is {name} pokemon page</h1>
-      <View name={name} />
-    </>
-  );
+  return <PokemonDetails name={name} />;
 }
-export default withClient(PokemonPage);
+export default withClient(Page);

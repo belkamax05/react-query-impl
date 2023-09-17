@@ -14,6 +14,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  color: #1E1E1E;
 
   & > header {
     flex-shrink: 0;
@@ -31,6 +32,10 @@ p,
 pre {
   margin: 0;
 }
+a {
+  all: unset;
+  cursor: pointer;
+}
 *,
 ::before,
 ::after {
@@ -38,9 +43,4 @@ pre {
   border-width: 0;
   border-style: solid;
   border-color: currentColor;
-}
-h1,
-h2 {
-  font-size: inherit;
-  font-weight: inherit;
 }

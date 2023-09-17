@@ -1,9 +1,10 @@
 import { Box } from '@mui/material';
 import { withClient } from '@query-impl/core';
 import { QueryClient } from '@tanstack/react-query';
-import pokemonListApi from '../../query/pokemonListApi';
+import pokemonListApi from './query/pokemonListApi';
 import View from './View';
 import styles from './styles.module.scss';
+
 
 async function Page({
   searchParams,
