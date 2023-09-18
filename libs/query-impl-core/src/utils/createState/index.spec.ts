@@ -1,5 +1,5 @@
 import { QueryClient, QueryKey } from '@tanstack/react-query';
-import createQueryState from '.';
+import createState from '.';
 import useQuerySpy from '../../testing/spy/useQuerySpy';
 
 describe('createQueryState', () => {
@@ -13,7 +13,7 @@ describe('createQueryState', () => {
 
   it('should set and get the query data correctly', () => {
     const queryClient = new QueryClient();
-    const { setData, getData, reset } = createQueryState({
+    const { setData, getData, reset } = createState({
       queryKey: mockQueryKey,
       initialData: mockInitialData,
     });
@@ -26,7 +26,7 @@ describe('createQueryState', () => {
   });
 
   it('should return the data from the useQuery hook', () => {
-    const { useData } = createQueryState({
+    const { useData } = createState({
       queryKey: mockQueryKey,
       initialData: mockInitialData,
     });

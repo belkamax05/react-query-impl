@@ -11,12 +11,12 @@ import {
  * @param initialData initial data
  * @returns react-query state methods, such as setData, getData, useData and queryKey
  * @example
- * const state = createQueryState({
+ * const state = createState({
  *  queryKey: ['test'],
  *  initialData: 'test',
  * });
  */
-const createQueryState = <TQueryKey extends QueryKey, TData>({
+const createState = <TQueryKey extends QueryKey, TData>({
   queryKey,
   queryFn,
   initialData,
@@ -78,6 +78,6 @@ const createQueryState = <TQueryKey extends QueryKey, TData>({
   };
 };
 
-export type CreateQueryStateResult = ReturnType<typeof createQueryState>;
+export type CreateQueryStateResult = ReturnType<typeof createState>;
 
-export default createQueryState;
+export default createState;

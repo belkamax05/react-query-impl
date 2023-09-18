@@ -1,4 +1,6 @@
 import { QueryKey } from '@tanstack/react-query';
-import { AnyObject } from './AnyObject';
 
-export type QueryKeyFunction<TParams extends AnyObject = AnyObject> = (params: TParams) => QueryKey;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type QueryKeyFunction<TParams = any> = (
+  ...params: TParams[]
+) => QueryKey;

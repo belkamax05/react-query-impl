@@ -1,11 +1,11 @@
-import { createQueryState, extendSelf } from '@query-impl/core';
+import { createState, extendSelf } from '@query-impl/core';
 import { QueryClient } from '@tanstack/react-query';
 import queryKeys from '../../../config/queryKeys';
 import { TodoItem } from '../types/TodoItem';
 import { TodoState } from '../types/TodoState';
 
 const todoState = extendSelf(
-  createQueryState({
+  createState({
     queryKey: queryKeys.samples.todo,
     queryFn: () => [] as TodoState,
   }),

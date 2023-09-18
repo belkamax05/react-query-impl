@@ -1,4 +1,4 @@
-import { createQueryState } from '@query-impl/core';
+import { createState } from '@query-impl/core';
 import queryKeys from '../../config/queryKeys';
 
 interface DashboardState {
@@ -12,7 +12,7 @@ interface DashboardState {
   initTime: string;
 }
 
-const dashboardState = createQueryState({
+const dashboardState = createState({
   queryKey: queryKeys.app.dashboard,
   initialData: null as DashboardState,
 });

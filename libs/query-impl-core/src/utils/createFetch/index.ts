@@ -7,7 +7,7 @@ import {
 import { QueryKeyFunction } from '../../types';
 import { AnyObject } from '../../types/AnyObject';
 
-const createQueryFetch = <
+const createFetch = <
   TParams extends AnyObject,
   TResult extends AnyObject = AnyObject
 >({
@@ -16,7 +16,6 @@ const createQueryFetch = <
   validateParams,
   validateResult,
 }: {
-  // name: TName;
   queryKey: QueryKey | QueryKeyFunction<TParams>;
   fetchFn: (params: TParams) => Promise<Awaited<TResult>>;
   /** should throw an error if request is invalid, no return value needed*/
@@ -66,7 +65,7 @@ const createQueryFetch = <
       queryKey: queryKey,
       queryFn: () => fetch(params),
       enabled,
-      initialData: initialData,
+      initialData,
     });
 
     return {
@@ -90,6 +89,6 @@ const createQueryFetch = <
   };
 };
 
-export type CreateQueryFetchResult = ReturnType<typeof createQueryFetch>;
+export type CreateFetchResult = ReturnType<typeof createFetch>;
 
-export default createQueryFetch;
+export default createFetch;
