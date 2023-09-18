@@ -1,8 +1,21 @@
-.root {
-  border: 2px solid salmon;
+.preview-modal-container {
+  position: absolute;
+  top: -20px;
+  left: 70px;
 }
 
-.preview-modal-container {
-  border: 2px solid aquamarine;
-  position: absolute;
+.preview-cell {
+  position: relative;
+}
+
+.table {
+  tr {
+    cursor: pointer;
+  }
+}
+
+.table-footer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }

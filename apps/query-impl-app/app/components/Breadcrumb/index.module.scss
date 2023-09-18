@@ -1,0 +1,54 @@
+$breadcrumb-color-prev: hsla(34, 85%, 35%, 1);
+$breadcrumb-color-curr: hsla(84, 85%, 35%, 1);
+
+.root {
+  & > * {
+    padding: 8px;
+    position: relative;
+    background-color: $breadcrumb-color-prev;
+
+    &:last-child {
+      background-color: $breadcrumb-color-curr;
+    }
+    &:not(:first-child) {
+      padding-left: 24px;
+    }
+    &::before {
+      content: ' ';
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: 20px solid transparent; /* Go big on the size, and let overflow hide */
+      border-bottom: 20px solid transparent;
+      border-left: 15px solid white;
+      position: absolute;
+      top: 50%;
+      margin-top: -20px;
+      margin-left: 1px;
+      left: 100%;
+      z-index: 1;
+    }
+    &::after {
+      content: ' ';
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: 20px solid transparent; /* Go big on the size, and let overflow hide */
+      border-bottom: 20px solid transparent;
+      border-left: 15px solid $breadcrumb-color-prev;
+      position: absolute;
+      top: 50%;
+      margin-top: -20px;
+      left: 100%;
+      z-index: 2;
+    }
+    &:last-child {
+      &::after {
+        border-left-color: $breadcrumb-color-curr;
+      }
+      &::before {
+        border-left-color: transparent;
+      }
+    }
+  }
+}

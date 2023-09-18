@@ -1,8 +1,6 @@
 export type Styles = {
-  'preview-cell': string;
-  'preview-modal-container': string;
+  'editing-box': string;
   table: string;
-  'table-footer': string;
 };
 
 export type ClassNames = keyof Styles;

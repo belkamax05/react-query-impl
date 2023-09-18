@@ -1,12 +1,14 @@
-.page-root {
-  border: 2px solid lime;
-}
-
 .layout-root {
   padding: 16px;
 }
 
-.nav {
+.page {
+  padding-left: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-nav {
   display: flex;
   gap: 16px;
 }

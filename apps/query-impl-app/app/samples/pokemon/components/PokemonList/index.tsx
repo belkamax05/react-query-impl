@@ -1,42 +1,31 @@
+'use client';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { Table, TableBody, TableCell, TableRow } from '@mui/material';
+import {
+  Box,
+  MenuItem,
+  Pagination,
+  Select,
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+} from '@mui/material';
 import _ from 'lodash';
 import Link from 'next/link';
-import { MouseEventHandler, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { ChangeEvent, MouseEventHandler, useCallback, useState } from 'react';
 import pokemonListApi from '../../query/pokemonListApi';
 import PokemonCard from '../PokemonCard';
 import classes from './index.module.scss';
 
-const base = {
-  'pointer-events': 'none',
-  'user-select': 'none',
-  display: 'block',
-  position: 'fixed',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  'border-radius': '100%',
-  'z-index': 10000,
-  '@keyframes pulse': {
-    '0%': {
-      transform: 'scale(0.8) translate(-50%, -50%)',
-    },
-    '50%': {
-      transform: 'scale(1) translate(-50%, -50%)',
-    },
-    '100%': {
-      transform: 'scale(0.8) translate(-50%, -50%)',
-    },
-  },
-  '@media only screen and (max-width: 700px)': {
-    '#cursor': {
-      display: 'none',
-    },
-  },
-};
-
 const PokemonList = ({ limit, offset }: { limit: number; offset: number }) => {
+  const router = useRouter();
   const { data } = pokemonListApi.useFetch({ limit, offset });
+
+  const { count } = data || {};
+  const totalPages = Math.ceil(count / limit);
+  const currentPage = Math.ceil(offset / limit) + 1;
+
   const [nameInFocus, setNameInFocus] = useState<string | null>(null);
 
   const onRowOver: MouseEventHandler = (ev) => {
@@ -47,35 +36,67 @@ const PokemonList = ({ limit, offset }: { limit: number; offset: number }) => {
     setNameInFocus(null);
   };
 
+  const onPaginationChange = useCallback(
+    (_ev: ChangeEvent<unknown>, page: number) => {
+      router.push(
+        `/samples/pokemon?limit=${limit}&offset=${(page - 1) * limit}`
+      );
+    },
+    [limit, router]
+  );
+
   return (
-    <div className={classes.root}>
-      <Table size="small">
+    <>
+      <Table size="small" className={classes.table}>
         <TableBody>
           {data?.results?.map((pokemon) => (
             <TableRow
-              onMouseOver={onRowOver}
-              onMouseOut={onRowOut}
-              data-name={pokemon.name}
               key={pokemon.name}
+              hover={true}
+              onClick={() => router.push(`/samples/pokemon/${pokemon.name}`)}
             >
-              <TableCell>
-                {_.capitalize(pokemon.name)}
-                {pokemon.name === nameInFocus && (
-                  <div className={classes['preview-modal-container']}>
-                    <PokemonCard name={pokemon.name} />
-                  </div>
-                )}
-              </TableCell>
-              <TableCell>
+              <TableCell>{_.capitalize(pokemon.name)}</TableCell>
+              <TableCell className={classes['preview-cell']}>
                 <Link href={`/samples/pokemon/${pokemon.name}`}>
-                  <VisibilityIcon fontSize={'large'} />
+                  <VisibilityIcon
+                    fontSize={'large'}
+                    data-name={pokemon.name}
+                    onMouseOver={onRowOver}
+                    onMouseOut={onRowOut}
+                  />
+                  {pokemon.name === nameInFocus && (
+                    <div className={classes['preview-modal-container']}>
+                      <PokemonCard name={pokemon.name} />
+                    </div>
+                  )}
                 </Link>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-    </div>
+      <Box className={classes['table-footer']}>
+        <Pagination
+          count={totalPages}
+          page={currentPage}
+          onChange={onPaginationChange}
+        />
+        <Select
+          placeholder="Offset"
+          value={limit}
+          onChange={(ev) =>
+            router.push(
+              `/samples/pokemon?limit=${ev.target.value}&offset=${offset}`
+            )
+          }
+        >
+          <MenuItem value={5}>5</MenuItem>
+          <MenuItem value={10}>10</MenuItem>
+          <MenuItem value={20}>20</MenuItem>
+          <MenuItem value={50}>50</MenuItem>
+        </Select>
+      </Box>
+    </>
   );
 };
 

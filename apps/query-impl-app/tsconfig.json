@@ -27,7 +27,7 @@
     "../../apps/query-impl-app/.next/types/**/*.ts",
     "../../dist/apps/query-impl-app/.next/types/**/*.ts",
     "next-env.d.ts"
-  ],
+, "app/samples/layout.tsx"  ],
   "exclude": [
     "node_modules",
     "jest.config.ts",

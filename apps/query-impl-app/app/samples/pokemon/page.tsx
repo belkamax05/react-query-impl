@@ -1,10 +1,9 @@
 import { Box } from '@mui/material';
 import { withClient } from '@query-impl/core';
 import { QueryClient } from '@tanstack/react-query';
+import PokemonList from './components/PokemonList';
 import pokemonListApi from './query/pokemonListApi';
-import View from './View';
 import styles from './styles.module.scss';
-
 
 async function Page({
   searchParams,
@@ -26,7 +25,7 @@ async function Page({
 
   return (
     <Box className={styles.root}>
-      <View limit={limit} offset={offset} />
+      <PokemonList limit={limit} offset={offset} />
     </Box>
   );
 }

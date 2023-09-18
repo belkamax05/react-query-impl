@@ -1,7 +1,7 @@
 export type Styles = {
   'layout-root': string;
-  nav: string;
-  'page-root': string;
+  page: string;
+  'page-nav': string;
 };
 
 export type ClassNames = keyof Styles;
