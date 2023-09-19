@@ -7,7 +7,6 @@ import {
   TableRow,
 } from '@mui/material';
 import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
 import pokemonApi from '../../query/pokemonApi';
 import classes from './index.module.scss';
 

@@ -7,9 +7,10 @@ import {
   TableRow,
   TextField,
 } from '@mui/material';
-import { useQueryClient } from '@tanstack/react-query';
+import { useIsRestoring, useQueryClient } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
 import { GapBox } from '../../../../components/GapBox';
+import SkeletonWithText from '../../../../components/SkeletonWithText';
 import { Guid } from '../../../../utils/helpers/Guid';
 import todoState from '../../query/todoState';
 import TodoListItem from '../TodoListItem';
@@ -17,10 +18,15 @@ import classes from './index.module.scss';
 
 const TodoList = () => {
   const queryClient = useQueryClient();
+  const restoring = useIsRestoring();
   const todos = todoState.useData();
   const [editingId, setEditingId] = useState<string | null>(null);
 
   const inputRef = useRef<HTMLInputElement>(null);
+
+  if (restoring) {
+    return <SkeletonWithText height={100} text="List is loading..." />;
+  }
 
   return (
     <div>

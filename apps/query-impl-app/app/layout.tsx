@@ -4,6 +4,7 @@ import AppFooter from './components/AppFooter';
 import AppHeader from './components/AppHeader';
 import QueryProvider from './components/QueryProvider';
 import './global.scss';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 export const metadata: Metadata = {
   title: 'Welcome to query-impl-app',

@@ -2,6 +2,8 @@
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import {
   Box,
+  FormControl,
+  FormLabel,
   MenuItem,
   Pagination,
   Select,
@@ -17,6 +19,7 @@ import { ChangeEvent, MouseEventHandler, useCallback, useState } from 'react';
 import pokemonListApi from '../../query/pokemonListApi';
 import PokemonCard from '../PokemonCard';
 import classes from './index.module.scss';
+import { GapBox } from '../../../../components/GapBox';
 
 const PokemonList = ({ limit, offset }: { limit: number; offset: number }) => {
   const router = useRouter();
@@ -59,7 +62,7 @@ const PokemonList = ({ limit, offset }: { limit: number; offset: number }) => {
               <TableCell className={classes['preview-cell']}>
                 <Link href={`/samples/pokemon/${pokemon.name}`}>
                   <VisibilityIcon
-                    fontSize={'large'}
+                    fontSize={'small'}
                     data-name={pokemon.name}
                     onMouseOver={onRowOver}
                     onMouseOut={onRowOut}
@@ -81,20 +84,27 @@ const PokemonList = ({ limit, offset }: { limit: number; offset: number }) => {
           page={currentPage}
           onChange={onPaginationChange}
         />
-        <Select
-          placeholder="Offset"
-          value={limit}
-          onChange={(ev) =>
-            router.push(
-              `/samples/pokemon?limit=${ev.target.value}&offset=${offset}`
-            )
-          }
-        >
-          <MenuItem value={5}>5</MenuItem>
-          <MenuItem value={10}>10</MenuItem>
-          <MenuItem value={20}>20</MenuItem>
-          <MenuItem value={50}>50</MenuItem>
-        </Select>
+        <GapBox>
+          <FormLabel htmlFor="rows-per-page">
+            Rows per page:
+          </FormLabel>
+          <Select
+            id="rows-per-page"
+            placeholder="Offset"
+            size="small"
+            value={limit}
+            onChange={(ev) =>
+              router.push(
+                `/samples/pokemon?limit=${ev.target.value}&offset=${offset}`
+              )
+            }
+          >
+            <MenuItem value={5}>5</MenuItem>
+            <MenuItem value={10}>10</MenuItem>
+            <MenuItem value={20}>20</MenuItem>
+            <MenuItem value={50}>50</MenuItem>
+          </Select>
+        </GapBox>
       </Box>
     </>
   );
