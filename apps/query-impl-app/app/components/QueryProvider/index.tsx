@@ -9,17 +9,14 @@ import queryPersister from '../../config/queryPersister';
 
 export default async function QueryProvider({
   children,
-  state,
-}: React.PropsWithChildren<{ state: DehydratedState }>) {
+}: React.PropsWithChildren) {
   const client = useMemo(() => new QueryClient(queryClientConfig), []);
   return (
     <PersistQueryClientProvider
       client={client}
       persistOptions={{ persister: queryPersister }}
     >
-      <ReactQueryStreamedHydration>
-        <Hydrate state={state}>{children}</Hydrate>
-      </ReactQueryStreamedHydration>
+      <ReactQueryStreamedHydration>{children}</ReactQueryStreamedHydration>
       <ReactQueryDevtools initialIsOpen={false} />
     </PersistQueryClientProvider>
   );
