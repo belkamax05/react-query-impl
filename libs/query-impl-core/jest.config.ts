@@ -8,4 +8,17 @@ export default {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/libs/query-impl-core',
+
+  coverageThreshold: {
+    global: {
+      branches: 85,
+      functions: 85,
+      lines: 83,
+      statements: 85,
+    },
+  },
+  collectCoverageFrom: [
+    '**/src/**/*.{js,jsx,ts,tsx}',
+    '!**/testing/**/*.*',
+  ],
 };

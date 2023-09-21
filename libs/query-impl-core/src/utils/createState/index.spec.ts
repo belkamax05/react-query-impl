@@ -1,40 +1,51 @@
 import { QueryClient, QueryKey } from '@tanstack/react-query';
 import createState from '.';
 import useQuerySpy from '../../testing/spy/useQuerySpy';
+import renderQueryHook from '../../testing/utils/renderQueryHook';
 
-describe('createQueryState', () => {
+describe('createState', () => {
   const mockQueryKey: QueryKey = ['test'];
   const mockInitialData = { foo: 'bar' };
   const mockData = { foo: 'baz' };
+  const queryClient = new QueryClient();
+
+  const testState = createState({
+    queryKey: mockQueryKey,
+    initialData: mockInitialData,
+  });
 
   beforeEach(() => {
+    testState.reset(queryClient);
     jest.clearAllMocks();
   });
 
   it('should set and get the query data correctly', () => {
-    const queryClient = new QueryClient();
-    const { setData, getData, reset } = createState({
-      queryKey: mockQueryKey,
-      initialData: mockInitialData,
-    });
+    testState.setData(mockData, queryClient);
 
-    setData(mockData, queryClient);
-
-    expect(getData(queryClient)).toEqual(mockData);
-    reset(queryClient);
-    expect(getData(queryClient)).toEqual(mockInitialData);
+    expect(testState.getData(queryClient)).toEqual(mockData);
+    testState.reset(queryClient);
+    expect(testState.getData(queryClient)).toEqual(mockInitialData);
   });
 
   it('should return the data from the useQuery hook', () => {
-    const { useData } = createState({
-      queryKey: mockQueryKey,
-      initialData: mockInitialData,
-    });
-
     useQuerySpy.mockReturnValueOnce({ data: mockData });
 
-    const result = useData();
+    const result = testState.useData();
 
     expect(result).toEqual(mockData);
+  });
+
+  it('should provide basic useClient functionality', () => {
+    const {
+      result: { current },
+    } = renderQueryHook(() => testState.useClient());
+
+    current.setData({ foo: 'new value' });
+
+    expect(current.getData().foo).toBe('new value');
+
+    current.reset();
+
+    expect(current.getData().foo).toBe(mockInitialData.foo);
   });
 });
