@@ -1,6 +1,7 @@
 'use client';
 import {
   Button,
+  Skeleton,
   Table,
   TableBody,
   TableCell,
@@ -10,8 +11,7 @@ import {
 import { useIsRestoring, useQueryClient } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
 import { GapBox } from '../../../../components/GapBox';
-import SkeletonWithText from '../../../../components/SkeletonWithText';
-import { Guid } from '../../../../utils/helpers/Guid';
+import getGuid from '../../../../utils/getGuid';
 import todoState from '../../query/todoState';
 import TodoListItem from '../TodoListItem';
 import classes from './index.module.scss';
@@ -24,9 +24,7 @@ const TodoList = () => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  if (restoring) {
-    return <SkeletonWithText height={100} text="List is loading..." />;
-  }
+  if (restoring) return <Skeleton height={100} />;
 
   return (
     <div>
@@ -52,7 +50,7 @@ const TodoList = () => {
                 <Button
                   onClick={() => {
                     todoState.add(
-                      { id: Guid.newGuid(), title: inputRef.current?.value },
+                      { id: getGuid(), title: inputRef.current?.value },
                       queryClient
                     );
                     inputRef.current.value = '';

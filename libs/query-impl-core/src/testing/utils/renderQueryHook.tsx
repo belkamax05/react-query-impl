@@ -1,4 +1,5 @@
-import { RenderHookOptions, WrapperComponent, renderHook } from '@testing-library/react-hooks';
+import { QueryClient } from '@tanstack/react-query';
+import { RenderHookOptions, renderHook } from '@testing-library/react-hooks';
 import QueryWrapper from './QueryWrapper';
 
 /**
@@ -11,15 +12,13 @@ import QueryWrapper from './QueryWrapper';
  */
 const renderQueryHook = <TProps, TResult>(
   callback: (props: TProps) => TResult,
-  options?: RenderHookOptions<TProps> | undefined,
+  client?: QueryClient,
+  options?: RenderHookOptions<TProps> | undefined
 ) => {
-  const { ...rest } = renderHook(callback, {
+  return renderHook(callback, {
     ...options,
-    wrapper: QueryWrapper as WrapperComponent<never>,
+    wrapper: (props) => <QueryWrapper {...props} client={client} />,
   });
-  return {
-    ...rest,
-  };
 };
 
 export default renderQueryHook;

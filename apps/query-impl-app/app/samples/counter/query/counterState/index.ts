@@ -1,5 +1,5 @@
 import { createState, extendSelf } from '@query-impl/core';
-import queryKeys from '../../../config/queryKeys';
+import queryKeys from '../../../../config/queryKeys';
 
 const counterStateBase = createState({
   queryKey: queryKeys.samples.counter,

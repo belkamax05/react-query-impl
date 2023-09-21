@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppFooter should render the footer with the correct startup and init times 1`] = `
+<body>
+  <div>
+    <footer
+      class="root"
+    >
+      <pre>
+        Startup time: 
+        2020-01-01T00:00:00.000Z
+      </pre>
+      <pre>
+        Init time: 
+        2020-01-01T00:00:00.000Z
+      </pre>
+    </footer>
+  </div>
+</body>
+`;

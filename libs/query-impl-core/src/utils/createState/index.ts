@@ -28,8 +28,18 @@ const createState = <TQueryKey extends QueryKey, TData>({
   initialData?: TData | (() => TData);
 }) => {
   /** get data from queryClient state */
+  const prefetch = (queryClient: QueryClient) =>
+    queryClient.prefetchQuery<TData>(queryKey, { initialData, queryFn });
+
+  /** get data from queryClient state */
   const getData = (queryClient: QueryClient) =>
     queryClient.getQueryData<TData>(queryKey);
+
+  /** get data from queryClient state */
+  const prefetchData = async (queryClient: QueryClient) => {
+    await prefetch(queryClient);
+    return getData(queryClient);
+  };
 
   /** set data into queryClient state */
   const setData = (data: TData, queryClient: QueryClient) =>
@@ -68,7 +78,9 @@ const createState = <TQueryKey extends QueryKey, TData>({
   };
 
   return {
+    prefetch,
     getData,
+    prefetchData,
     setData,
     useData,
     reset,
@@ -78,6 +90,8 @@ const createState = <TQueryKey extends QueryKey, TData>({
   };
 };
 
-export type CreateQueryStateResult = ReturnType<typeof createState>;
+export type CreateStateResult<TQueryKey extends QueryKey, TData> = ReturnType<
+  typeof createState<TQueryKey, TData>
+>;
 
 export default createState;

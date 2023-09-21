@@ -5,13 +5,13 @@ import renderQueryHook from '../../testing/utils/renderQueryHook';
 
 describe('createState', () => {
   const mockQueryKey: QueryKey = ['test'];
-  const mockInitialData = { foo: 'bar' };
-  const mockData = { foo: 'baz' };
+  const initialData = { foo: 'bar' };
+  const changedData = { foo: 'baz' };
   const queryClient = new QueryClient();
 
   const testState = createState({
     queryKey: mockQueryKey,
-    initialData: mockInitialData,
+    initialData,
   });
 
   beforeEach(() => {
@@ -20,19 +20,19 @@ describe('createState', () => {
   });
 
   it('should set and get the query data correctly', () => {
-    testState.setData(mockData, queryClient);
+    testState.setData(changedData, queryClient);
 
-    expect(testState.getData(queryClient)).toEqual(mockData);
+    expect(testState.getData(queryClient)).toEqual(changedData);
     testState.reset(queryClient);
-    expect(testState.getData(queryClient)).toEqual(mockInitialData);
+    expect(testState.getData(queryClient)).toEqual(initialData);
   });
 
   it('should return the data from the useQuery hook', () => {
-    useQuerySpy.mockReturnValueOnce({ data: mockData });
+    useQuerySpy.mockReturnValueOnce({ data: changedData });
 
     const result = testState.useData();
 
-    expect(result).toEqual(mockData);
+    expect(result).toEqual(changedData);
   });
 
   it('should provide basic useClient functionality', () => {
@@ -46,6 +46,6 @@ describe('createState', () => {
 
     current.reset();
 
-    expect(current.getData().foo).toBe(mockInitialData.foo);
+    expect(current.getData().foo).toBe(initialData.foo);
   });
 });

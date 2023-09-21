@@ -4,12 +4,8 @@ import styles from './styles.module.scss';
 const AppFooter = () => {
   return (
     <footer className={styles['root']}>
-      <pre>
-        {[
-          `Startup time: ${START_TIME.toISOString()}`,
-          `Init time: ${new Date().toISOString()}`,
-        ].join('\n')}
-      </pre>
+      <pre>Startup time: {START_TIME.toISOString()}</pre>
+      <pre>Init time: {new Date().toISOString()}</pre>
     </footer>
   );
 };

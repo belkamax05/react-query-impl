@@ -1,1 +1,1 @@
-export { default as localStorageMock } from './mocks/localStorageMock';
+export { default as renderQueryHook } from './utils/renderQueryHook';
