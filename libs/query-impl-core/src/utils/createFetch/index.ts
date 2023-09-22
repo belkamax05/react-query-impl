@@ -89,6 +89,9 @@ const createFetch = <
   };
 };
 
-export type CreateFetchResult = ReturnType<typeof createFetch>;
+export type CreateFetchResult<
+  TParams extends AnyObject,
+  TResult extends AnyObject = AnyObject
+> = ReturnType<typeof createFetch<TParams, TResult>>;
 
 export default createFetch;

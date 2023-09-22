@@ -1,7 +1,7 @@
 import { createFetch } from '@query-impl/core';
-import Axios from '../../../config/axios';
-import PokemonApiRequest from '../types/PokemonApiRequest';
-import PokemonApiResponse from '../types/PokemonApiResponse';
+import Axios from '../../../../config/axios';
+import PokemonApiRequest from '../../types/PokemonApiRequest';
+import PokemonApiResponse from '../../types/PokemonApiResponse';
 
 const pokemonApi = createFetch({
   queryKey: ({ name }) => ['pokemon-api', name],

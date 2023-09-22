@@ -12,10 +12,12 @@ describe('Breadcrumb', () => {
   });
 
   it('should render the correct href for each breadcrumb link', () => {
-    const { getByText } = render(<Breadcrumb />);
+    const { baseElement, getByText } = render(<Breadcrumb />);
     expect(getByText('Path').getAttribute('href')).toBe('/path');
     expect(getByText('To').getAttribute('href')).toBe('/path/to');
     expect(getByText('Some').getAttribute('href')).toBe('/path/to/some');
     expect(getByText('Page').getAttribute('href')).toBe('/path/to/some/page');
+
+    expect(baseElement).toMatchSnapshot();
   });
 });

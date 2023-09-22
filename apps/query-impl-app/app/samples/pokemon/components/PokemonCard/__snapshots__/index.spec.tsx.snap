@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PokemonCard should not fail when no data provided 1`] = `
+<body>
+  <div>
+    <div
+      class="root"
+    >
+      <h3
+        class="title"
+      >
+        #undefined - undefined
+      </h3>
+      <div
+        class="img"
+      >
+        <img />
+      </div>
+      <div
+        class="stats"
+      >
+        <pre>
+          base_experience: 
+        </pre>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`PokemonCard should render the pokemon name and id 1`] = `
+<body>
+  <div>
+    <div
+      class="root"
+    >
+      <h3
+        class="title"
+      >
+        #25 - pikachu
+      </h3>
+      <div
+        class="img"
+      >
+        <img
+          alt="pikachu"
+          src="https://img.png"
+        />
+      </div>
+      <div
+        class="stats"
+      >
+        <pre>
+          base_experience: 
+          112
+        </pre>
+      </div>
+    </div>
+  </div>
+</body>
+`;

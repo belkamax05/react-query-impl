@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Breadcrumb should render the correct href for each breadcrumb link 1`] = `
+<body>
+  <div>
+    <div
+      class="root"
+    >
+      <a
+        href="/path"
+      >
+        Path
+      </a>
+      <a
+        href="/path/to"
+      >
+        To
+      </a>
+      <a
+        href="/path/to/some"
+      >
+        Some
+      </a>
+      <a
+        href="/path/to/some/page"
+      >
+        Page
+      </a>
+    </div>
+  </div>
+</body>
+`;

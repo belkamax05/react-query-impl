@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GapBox should render with custom props 1`] = `
+<div>
+  <div
+    class="MuiBox-root css-1p44k52"
+  />
+</div>
+`;
+
+exports[`GapBox should render with default props 1`] = `
+<div>
+  <div
+    class="MuiBox-root css-1i27l4i"
+  />
+</div>
+`;
