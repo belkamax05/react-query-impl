@@ -12,7 +12,7 @@ async function Page({
   searchParams: { limit: string; offset: string };
   queryClient: QueryClient;
 }) {
-  const limit = parseInt(searchParams.limit || '5');
+  const limit = parseInt(searchParams.limit || '10');
   const offset = parseInt(searchParams.offset || '0');
 
   await pokemonListApi.prefetch(

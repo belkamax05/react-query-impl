@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render } from '@testing-library/react';
 import { ReactElement } from 'react';
 import PokemonCard, { PokemonCardProps } from '.';
-import pokemonApiSpy from '../../query/pokemonApi/spy.spec';
+import pokemonApiSpy from '../../../../testing/spy/pokemonApiSpy';
 
 describe('PokemonCard', () => {
   const queryClient = new QueryClient();
