@@ -9,6 +9,7 @@ export interface CreateFetchInstance<
   TParams extends AnyObject,
   TData extends AnyObject = AnyObject
 > {
+  /** options passed to createFetch */
   options: CreateFetchOptions<TParams, TData>;
   queryKey: QueryKey | QueryKeyFunction<TParams>;
   fetch: (params: TParams) => Promise<TData>;

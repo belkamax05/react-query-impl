@@ -1,7 +1,7 @@
-import { CreateFetchResult } from '../../utils/createFetch';
+import { CreateFetchInstance } from '../../utils/createFetch/types';
 
 const createFetchSpy = <TParams, TResult>(
-  api: CreateFetchResult<TParams, TResult>
+  api: CreateFetchInstance<TParams, TResult>
 ) => ({
   useFetch: jest.spyOn(api, 'useFetch') as jest.Mock,
 });
