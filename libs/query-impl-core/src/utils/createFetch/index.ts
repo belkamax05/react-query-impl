@@ -71,4 +71,6 @@ const createFetch = <TParams extends AnyObject, TData extends AnyObject>(
   };
 };
 
+export * from './types';
+
 export default createFetch;

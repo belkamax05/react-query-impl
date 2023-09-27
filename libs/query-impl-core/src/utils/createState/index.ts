@@ -1,9 +1,8 @@
-import {
-  QueryClient,
-  QueryKey,
-  useQuery,
-  useQueryClient,
-} from '@tanstack/react-query';
+import { QueryKey, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMemo } from 'react';
+import { CreateStateInstance } from './types/CreateStateInstance';
+import { CreateStateOptions } from './types/CreateStateOptions';
+import { CreateStateUseClientResult } from './types/CreateStateUseClientResult';
 
 /**
  * Creates react-query based state allowing to read and write data to the query cache
@@ -16,82 +15,66 @@ import {
  *  initialData: 'test',
  * });
  */
-const createState = <TQueryKey extends QueryKey, TData>({
-  queryKey,
-  queryFn,
-  initialData,
-}: {
-  /** queryKey where state is stored */
-  queryKey: TQueryKey;
-  queryFn?: () => TData;
-  /** data state have to be initialized with */
-  initialData?: TData | (() => TData);
-}) => {
-  /** get data from queryClient state */
-  const prefetch = (queryClient: QueryClient) =>
-    queryClient.prefetchQuery<TData>(queryKey, { initialData, queryFn });
+const createState = <TQueryKey extends QueryKey, TData>(
+  options: CreateStateOptions<TQueryKey, TData>
+): CreateStateInstance<TQueryKey, TData> => {
+  const { queryKey, queryFn, initialData } = options;
+  type TInstance = CreateStateInstance<TQueryKey, TData>;
 
-  /** get data from queryClient state */
-  const getData = (queryClient: QueryClient) =>
+  const prefetch: TInstance['prefetch'] = (queryClient) =>
+    queryClient.prefetchQuery<TData, unknown, TData, TQueryKey>(queryKey, { initialData, queryFn });
+
+  const getData: TInstance['getData'] = (queryClient) =>
     queryClient.getQueryData<TData>(queryKey);
 
-  /** get data from queryClient state */
-  const prefetchData = async (queryClient: QueryClient) => {
+  const prefetchData: TInstance['prefetchData'] = async (queryClient) => {
     await prefetch(queryClient);
     return getData(queryClient);
   };
 
-  /** set data into queryClient state */
-  const setData = (data: TData, queryClient: QueryClient) =>
+  const setData: TInstance['setData'] = (data, queryClient) =>
     queryClient.setQueryData(queryKey, data);
 
-  /** resets data to initial */
-  const reset = (queryClient: QueryClient) => {
+  const reset: TInstance['reset'] = (queryClient) => {
     const value = initialData instanceof Function ? initialData() : initialData;
-    setData(value, queryClient);
+    return setData(value, queryClient);
   };
 
-  /** get data using react-query hook */
-  const useData = () => {
-    // const queryClient = useQueryClient();
-    // const current = getData(queryClient);
+  const useData: TInstance['useData'] = () => {
     const { data } = useQuery({
       queryKey,
-      // queryFn: () => current || initialData,
       initialData,
       queryFn,
     });
     return data;
   };
 
-  const useClient = () => {
+  const useClient: TInstance['useClient'] = () => {
     const queryClient = useQueryClient();
-    const getDataInner = () => getData(queryClient);
-    const setDataInner = (data: TData) => setData(data, queryClient);
-    const resetInner = () => reset(queryClient);
-    return {
-      getData: getDataInner,
-      setData: setDataInner,
-      reset: resetInner,
-      useData,
-    };
+    return useMemo(
+      (): CreateStateUseClientResult<TData> => ({
+        getData: () => getData(queryClient),
+        setData: (data) => setData(data, queryClient),
+        reset: () => reset(queryClient),
+        useData: () => useData(),
+      }),
+      [queryClient]
+    );
   };
 
   return {
+    options,
+    queryKey,
     prefetch,
     getData,
     prefetchData,
     setData,
     useData,
     reset,
-    queryKey,
-    initialData,
     useClient,
   };
 };
 
-export type CreateStateResult<TQueryKey extends QueryKey, TData> = ReturnType<
-  typeof createState<TQueryKey, TData>
->;
+export * from './types';
 
 export default createState;

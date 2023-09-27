@@ -1,8 +1,8 @@
 import { QueryKey } from '@tanstack/react-query';
-import { CreateStateResult } from '../../utils/createState';
+import { CreateStateInstance } from '../../utils/createState/types/CreateStateInstance';
 
 const createStateSpy = <TQueryKey extends QueryKey, TData>(
-  state: CreateStateResult<TQueryKey, TData>
+  state: CreateStateInstance<TQueryKey, TData>
 ) => ({
   useData: jest.spyOn(state, 'useData') as jest.Mock,
 });

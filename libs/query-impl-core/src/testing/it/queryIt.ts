@@ -1,12 +1,11 @@
 import { QueryClient, QueryKey } from '@tanstack/react-query';
-import { CreateStateResult } from '../../utils/createState';
+import { CreateStateInstance } from '../../utils/createState/types/CreateStateInstance';
 
 const queryIt = {
   state: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     shouldChangeData: <
       TData,
-      TState extends CreateStateResult<QueryKey, TData>
+      TState extends CreateStateInstance<QueryKey, TData>
     >(
       state: TState,
       changedData: TData
