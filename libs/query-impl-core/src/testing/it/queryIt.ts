@@ -3,11 +3,8 @@ import { CreateStateInstance } from '../../utils/createState/types/CreateStateIn
 
 const queryIt = {
   state: {
-    shouldChangeData: <
-      TData,
-      TState extends CreateStateInstance<QueryKey, TData>
-    >(
-      state: TState,
+    shouldChangeData: <TQueryKey extends QueryKey, TData>(
+      state: CreateStateInstance<TQueryKey, TData>,
       changedData: TData
     ) => {
       it("should change it's data", async () => {

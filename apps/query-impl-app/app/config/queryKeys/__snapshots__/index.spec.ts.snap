@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`queryKeys should match snapshot 1`] = `
+{
+  "app": {
+    "dashboard": [
+      "app",
+      "dashboard",
+    ],
+  },
+  "samples": {
+    "counter": [
+      "samples",
+      "counter",
+    ],
+    "todo": [
+      "samples",
+      "todo",
+    ],
+  },
+}
+`;
